@@ -11,6 +11,11 @@ hidden_layer2_size = 4000
 hidden_layer3_size = 4000
 hidden_layer4_size = 4000
 hidden_layer5_size = 4000
+hidden_layer6_size = 4000
+hidden_layer7_size = 4000
+hidden_layer8_size = 4000
+hidden_layer9_size = 4000
+hidden_layer10_size = 4000
 
 tf.reset_default_graph()
 
@@ -37,9 +42,29 @@ weights_5 = tf.get_variable("weights_5", [hidden_layer4_size, hidden_layer5_size
 biases_5 = tf.get_variable("biases_5", [hidden_layer5_size])
 outputs_5 = tf.nn.relu(tf.matmul(outputs_4, weights_5) + biases_5)
 
-weights_final = tf.get_variable("weights_final", [hidden_layer5_size, output_size])
+weights_6 = tf.get_variable("weights_6", [hidden_layer5_size, hidden_layer6_size])
+biases_6 = tf.get_variable("biases_6", [hidden_layer6_size])
+outputs_6 = tf.nn.relu(tf.matmul(outputs_5, weights_6) + biases_6)
+
+weights_7 = tf.get_variable("weights_7", [hidden_layer6_size, hidden_layer7_size])
+biases_7 = tf.get_variable("biases_7", [hidden_layer7_size])
+outputs_7 = tf.nn.relu(tf.matmul(outputs_6, weights_7) + biases_7)
+
+weights_8 = tf.get_variable("weights_8", [hidden_layer7_size, hidden_layer8_size])
+biases_8 = tf.get_variable("biases_8", [hidden_layer8_size])
+outputs_8 = tf.nn.relu(tf.matmul(outputs_7, weights_8) + biases_8)
+
+weights_9 = tf.get_variable("weights_9", [hidden_layer8_size, hidden_layer9_size])
+biases_9 = tf.get_variable("biases_9", [hidden_layer9_size])
+outputs_9 = tf.nn.relu(tf.matmul(outputs_8, weights_9) + biases_9)
+
+weights_10 = tf.get_variable("weights_10", [hidden_layer9_size, hidden_layer10_size])
+biases_10 = tf.get_variable("biases_10", [hidden_layer10_size])
+outputs_10 = tf.nn.relu(tf.matmul(outputs_9, weights_10) + biases_10)
+
+weights_final = tf.get_variable("weights_final", [hidden_layer10_size, output_size])
 biases_final = tf.get_variable("biases_final", [output_size])
-outputs = tf.matmul(outputs_5, weights_final) + biases_final
+outputs = tf.matmul(outputs_10, weights_final) + biases_final
 
 loss = tf.nn.softmax_cross_entropy_with_logits(logits=outputs, labels=targets)
 mean_loss = tf.reduce_mean(loss)
