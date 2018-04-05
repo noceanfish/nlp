@@ -9,12 +9,14 @@ def softmax(x):
     return expa / expa.sum()
 
 
-def sigmoid(x, w, b):
-    return 1 / (1 + np.exp(-x.dot(w) - b))
+def sigmoid(x):
+    return 1 / (1 + np.exp(x))
 
 
 def forward(x, w1, b1, w2, b2):
-    z = sigmoid(x, w1, b1)
+    t = x.dot(w1) + b1
+    z = sigmoid(t)
+
     return softmax(z.dot(w2) + b2)
 
 
@@ -29,9 +31,6 @@ def classification_rate(Y, P):
 
 
 def main():
-    a = np.random.rand(5)
-    print('softmax:', softmax(a))
-
     Nclass = 500
     X1 = np.random.randn(Nclass, 2) + np.array([0, -2])
     X2 = np.random.randn(Nclass, 2) + np.array([2, 2])
