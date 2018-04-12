@@ -120,6 +120,7 @@ def main():
     plt.plot(costs)
     plt.show()
 
+    print("finisged!")
 
 if __name__ == "__main__":
     main()
