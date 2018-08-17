@@ -114,7 +114,7 @@ def train_model(savedir):
                 word = sentence[pos]
 
                 context_words = get_context(pos, sentence, window_size)
-                neg_word = np.random.choice(vocab_size, p-p_neg)
+                neg_word = np.random.choice(vocab_size, p=p_neg)
                 targets = np.array(context_words)
 
                 c = sgd(word, targets, 1, learning_rate, W, V)
